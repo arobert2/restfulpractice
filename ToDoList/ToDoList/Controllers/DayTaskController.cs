@@ -11,5 +11,31 @@ namespace ToDoList.Controllers
     public class DayTaskController : Controller
     {
         private readonly IToDoRepository _toDoRepository;
+
+        public DayTaskController(IToDoRepository toDoRepository)
+        {
+            _toDoRepository = toDoRepository;
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetDay(Guid id)
+        {
+            var daysFromRepo = _toDoRepository.GetDay(id);
+
+            if (daysFromRepo == null)
+                return NotFound();
+
+            return Ok(daysFromRepo);
+        }
+        [HttpGet("{start}/{end}")]
+        public IActionResult GetDays(DateTime start, DateTime end)
+        {
+            var daysFromRepo = _toDoRepository.GetDays(start, end);
+
+            if(daysFromRepo == null)
+            {
+
+            }
+        }
     }
 }

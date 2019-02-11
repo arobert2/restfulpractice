@@ -68,7 +68,14 @@ namespace ToDoList
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseMvc();
+            app.UseMvc(setup =>
+            {
+                setup.MapRoute(
+                    "Default",
+                    "",
+                    new { controller = "home", action = "index" }
+                    );
+            });
         }
     }
 }
