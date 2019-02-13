@@ -1,0 +1,18 @@
+﻿@model CalendarApp.Models.MonthDto
+@{
+    ViewData["Title"] = "Calendar";
+}
+
+<div class="calendar">
+    @for (int i = 0; i < Model.DaysInMonth; i++)
+    {
+        var day = new DateTime(Model.Year, Model.Month, i + 1).DayOfWeek.ToString();
+        var dayNum = i + 1;
+    
+        <div class="day" id="@day">
+            <div class="day-header">@dayNum</div>
+            <div class="day-body"></div>
+        </div>
+    }
+</div>
+

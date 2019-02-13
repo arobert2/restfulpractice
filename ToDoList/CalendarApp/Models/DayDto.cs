@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace ToDoList.Models
 {
-    public class DayTaskDto
+    public class DayDto
     {
         public DateTime Date { get; set; }
-        public List<TaskToDoDto> Days { get; set; }
+
+        public DayOfWeek DayOfWeek => Date.DayOfWeek;
+        public List<TaskDto> Tasks { get; set; }
     }
 }

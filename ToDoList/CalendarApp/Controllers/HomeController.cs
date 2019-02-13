@@ -7,7 +7,6 @@ using ToDoList.Services;
 
 namespace ToDoList.Controllers
 {
-    [Route("Home/{action}")]
     public class HomeController : Controller
     {
         private readonly IToDoRepository _toDoRepository;

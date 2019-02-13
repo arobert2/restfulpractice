@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ToDoList.Entities
 {
-    public class DayTask
+    public class DayEntity
     {
         [Key]
         public Guid Id { get; set; }
         [Required]
         public DateTime Date { get; set; }
-        public ICollection<TaskToDo> Tasks { get; set; }
-            = new List<TaskToDo>();
+        public ICollection<TaskEntity> Tasks { get; set; }
+            = new List<TaskEntity>();
     }
 }

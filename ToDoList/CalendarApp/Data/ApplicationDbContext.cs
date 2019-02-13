@@ -12,7 +12,7 @@ namespace ToDoList.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
 
-        public DbSet<DayTask> DayTasks { get; set; }
-        public DbSet<TaskToDo> TasksToDo { get; set; }
+        public DbSet<DayEntity> DayTasks { get; set; }
+        public DbSet<TaskEntity> TasksToDo { get; set; }
     }
 }

@@ -16,12 +16,12 @@ namespace ToDoList.Services
             _context = context;
         }
 
-        public void AddDay(DayTask day)
+        public void AddDay(DayEntity day)
         {
             _context.DayTasks.Add(day);
         }
 
-        public void AddTask(TaskToDo task)
+        public void AddTask(TaskEntity task)
         {
             _context.TasksToDo.Add(task);
         }
@@ -31,34 +31,34 @@ namespace ToDoList.Services
             return _context.DayTasks.FirstOrDefault(dt => dt.Id == id) != null;
         }
 
-        public void DeleteDay(DayTask day)
+        public void DeleteDay(DayEntity day)
         {
             _context.DayTasks.Remove(day);
         }
 
-        public DayTask GetDay(DateTime date)
+        public DayEntity GetDay(DateTime date)
         {
             return _context.DayTasks.FirstOrDefault(dt => dt.Date == date);
         }
 
-        public DayTask GetDay(Guid id)
+        public DayEntity GetDay(Guid id)
         {
             return _context.DayTasks.FirstOrDefault(dt => dt.Id == id);
         }
 
-        public ICollection<DayTask> GetDays(DateTime start, DateTime end)
+        public ICollection<DayEntity> GetDays(DateTime start, DateTime end)
         {
             return _context.DayTasks.Where(dt => dt.Date >= start && dt.Date <= end).ToList();
         }
 
-        public TaskToDo GetTask(Guid id)
+        public TaskEntity GetTask(Guid id)
         {
             return _context.TasksToDo.FirstOrDefault(ttd => ttd.Id == id);
         }
 
-        public ICollection<TaskToDo> GetTasks(DayTask day)
+        public ICollection<TaskEntity> GetTasks(DayEntity day)
         {
-            return _context.TasksToDo.Where(ttd => ttd.Day == day.Id).ToList();
+            return _context.TasksToDo.Where(ttd => ttd.DayId == day.Id).ToList();
         }
 
         public bool Save()
@@ -66,7 +66,7 @@ namespace ToDoList.Services
             return (_context.SaveChanges() >= 0);
         }
 
-        public void UpdateTask(TaskToDo task)
+        public void UpdateTask(TaskEntity task)
         {
             //Implemintation unneeded.
         }
