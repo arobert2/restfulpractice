@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,13 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ToDoList.Data;
-using ToDoList.Services;
 
-namespace ToDoList
+namespace CalendarApp
 {
     public class Startup
     {
@@ -34,15 +31,8 @@ namespace ToDoList
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(db => db.UseSqlServer(Configuration["connectionStrings:appConnectionString"]));
 
-            services.AddScoped<IToDoRepository, ToDoRepository>();
-
-            services.AddMvc(setup => {
-                setup.ReturnHttpNotAcceptable = true;
-                //converters go here
-
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,14 +44,9 @@ namespace ToDoList
             }
             else
             {
-                app.UseExceptionHandler(builder =>
-                {
-                    builder.Run(async context =>
-                    {
-                        context.Response.StatusCode = 500;
-                        await context.Response.WriteAsync("Interal Server Error 500");
-                    });
-                });
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
             }
 
             app.UseHttpsRedirection();
@@ -72,8 +57,7 @@ namespace ToDoList
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}"
-                    );
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

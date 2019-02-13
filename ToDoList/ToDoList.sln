@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList", "ToDoList\ToDoList.csproj", "{40A8A8E2-BA23-4718-84CC-6A80404F2ABD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarApp", "CalendarApp\CalendarApp.csproj", "{C843085C-3C4F-47C3-835B-02736A1CCF68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{40A8A8E2-BA23-4718-84CC-6A80404F2ABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40A8A8E2-BA23-4718-84CC-6A80404F2ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40A8A8E2-BA23-4718-84CC-6A80404F2ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40A8A8E2-BA23-4718-84CC-6A80404F2ABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C843085C-3C4F-47C3-835B-02736A1CCF68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C843085C-3C4F-47C3-835B-02736A1CCF68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C843085C-3C4F-47C3-835B-02736A1CCF68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C843085C-3C4F-47C3-835B-02736A1CCF68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
