@@ -2,17 +2,47 @@
 @{
     ViewData["Title"] = "Calendar";
 }
-
-<div class="calendar">
-    @for (int i = 0; i < Model.DaysInMonth; i++)
+<link rel="stylesheet" href="~/css/calendar.css" />
+<div class="calendar-frame">
+    @for (int i = -(int)Model.StartDay; i < 42 - (int)Model.StartDay; i++)
     {
-        var day = new DateTime(Model.Year, Model.Month, i + 1).DayOfWeek.ToString();
+        var day = i < 0 ? new DateTime(Model.Year, Model.Month - 1, Model.LastMonthDaysInMonth + i + 1).DayOfWeek.ToString() : 
+                  i >= Model.DaysInMonth ? new DateTime(Model.Year, Model.Month + 1, i - Model.DaysInMonth + 1).DayOfWeek.ToString() :
+                  new DateTime(Model.Year, Model.Month, i + 1).DayOfWeek.ToString();
         var dayNum = i + 1;
-    
-        <div class="day" id="@day">
-            <div class="day-header">@dayNum</div>
-            <div class="day-body"></div>
-        </div>
+
+
+        if (i >= 0 && i < Model.DaysInMonth)
+        {
+            if (DateTime.Now.Day == i + 1 && DateTime.Now.Month == Model.Month)
+            {
+                <div class="calendar-cell @day current-day">
+                    <div class="day-header">@dayNum</div>
+                    <div class="day-body"></div>
+                </div>
+            }
+            else
+            {
+                <div class="calendar-cell @day">
+                    <div class="day-header">@dayNum</div>
+                    <div class="day-body"></div>
+                </div>
+            }
+        }
+        else if (i < 0)
+        {
+            <div class="calendar-cell @day  last-month-cell">
+                <div class="day-header">@(Model.LastMonthDaysInMonth + dayNum)</div>
+                <div class="day-body"></div>
+            </div>
+        }
+        else if (i >= Model.DaysInMonth)
+        {
+            <div class="calendar-cell @day  next-month-cell">
+                <div class="day-header">@(dayNum - Model.DaysInMonth)</div>
+                <div class="day-body"></div>
+            </div>
+        }
     }
 </div>
 

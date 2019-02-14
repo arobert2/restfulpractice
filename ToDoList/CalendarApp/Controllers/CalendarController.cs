@@ -16,7 +16,9 @@ namespace CalendarApp.Controllers
                 Month = DateTime.Now.Month,
                 Year = DateTime.Now.Year,
                 StartDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).DayOfWeek,
-                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month),
+                LastMonthDaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month - 1 == 0 ? 12 : DateTime.Now.Month - 1),
+                NextMonthDaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month + 1 == 13 ? 1 : DateTime.Now.Month + 1)
             };
 
             return View(monthDto);
