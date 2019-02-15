@@ -1,14 +1,47 @@
 ﻿.calendar-frame {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto;
     background-color: #2196F3;
-    padding: 10px;
 }
 
 .calendar-cell {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
+}
+
+.current-day {
+    background-color: cornflowerblue;
+}
+
+.current-day .day-header{
+    background-color: darkblue;
+}
+
+.last-month-cell {
+    background-color: gray;
+}
+
+.last-month-cell .day-header{
+    background-color: black;
+}
+
+.next-month-cell .day-header {
+    background-color: black;
+}
+
+.next-month-cell {
+    background-color: gray;
+}
+
+.day-header {
+    height: 20px;
+    font-size: 10px;
+    color: white;
+    background-color: blue;
+    padding-left: 3px;
+}
+
+.day-body {
+    height:100px;
 }
