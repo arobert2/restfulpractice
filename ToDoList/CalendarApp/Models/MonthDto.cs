@@ -13,5 +13,8 @@ namespace CalendarApp.Models
         public int LastMonthDaysInMonth { get; set; }
         public int NextMonthDaysInMonth { get; set; }
         public DayOfWeek StartDay { get; set; }
+
+        public DateTime LastMonth { get; set; }
+        public DateTime NextMonth { get; set; }
     }
 }

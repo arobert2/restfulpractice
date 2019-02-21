@@ -4,16 +4,16 @@
 }
 <link rel="stylesheet" href="~/css/calendar.css" />
 <div>
-    <div class="calendar-toolbar">
-        <button class="month-last"><<</button>
-        <button class="month-next">>></button>
-        <div class="month-name">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month);</div>
+    <div class="calendar-toolbar bg-info clearfix">
+        <a asp-controller="Calendar" asp-route-month="@Model.LastMonth.Month" asp-route-year="@Model.LastMonth.Year" class="month-button btn btn-primary float-left"><<</a>
+        <span>@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) @Model.Year</span>
+        <a asp-controller="Calendar" asp-route-month="@Model.NextMonth.Month" asp-route-year="@Model.NextMonth.Year" class="month-button btn btn-primary float-right">>></a>
     </div>
     <div class="calendar-frame">
         @for (int i = -(int)Model.StartDay; i < 42 - (int)Model.StartDay; i++)
         {
-            var day = i < 0 ? new DateTime(Model.Year, Model.Month - 1, Model.LastMonthDaysInMonth + i + 1).DayOfWeek.ToString() : 
-                      i >= Model.DaysInMonth ? new DateTime(Model.Year, Model.Month + 1, i - Model.DaysInMonth + 1).DayOfWeek.ToString() :
+            var day = i < 0 ? new DateTime(Model.Year, Model.Month - 1 == 0 ? 12 : Model.Month - 1, Model.LastMonthDaysInMonth + i + 1).DayOfWeek.ToString() :
+                      i >= Model.DaysInMonth ? new DateTime(Model.Year, Model.Month + 1 == 13 ? 1: Model.Month + 1, i - Model.DaysInMonth + 1).DayOfWeek.ToString() :
                       new DateTime(Model.Year, Model.Month, i + 1).DayOfWeek.ToString();
             var dayNum = i + 1;
 
