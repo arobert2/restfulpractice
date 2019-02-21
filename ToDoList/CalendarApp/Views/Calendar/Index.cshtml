@@ -16,20 +16,20 @@
                       i >= Model.DaysInMonth ? new DateTime(Model.Year, Model.Month + 1 == 13 ? 1: Model.Month + 1, i - Model.DaysInMonth + 1).DayOfWeek.ToString() :
                       new DateTime(Model.Year, Model.Month, i + 1).DayOfWeek.ToString();
             var dayNum = i + 1;
-
+            var cellid = day + i;
 
             if (i >= 0 && i < Model.DaysInMonth)
             {
                 if (DateTime.Now.Day == i + 1 && DateTime.Now.Month == Model.Month)
                 {
-                    <div class="calendar-cell @day current-day">
+                    <div class="calendar-cell @day current-day" id="@cellid">
                         <div class="day-header">@dayNum</div>
                         <div class="day-body"></div>
                     </div>
                 }
                 else
                 {
-                    <div class="calendar-cell @day">
+                    <div class="calendar-cell @day" id="@cellid">
                         <div class="day-header">@dayNum</div>
                         <div class="day-body"></div>
                     </div>
@@ -37,14 +37,14 @@
             }
             else if (i < 0)
             {
-                <div class="calendar-cell @day  last-month-cell">
+                <div class="calendar-cell @day last-month-cell" id="@cellid">
                     <div class="day-header">@(Model.LastMonthDaysInMonth + dayNum)</div>
                     <div class="day-body"></div>
                 </div>
             }
             else if (i >= Model.DaysInMonth)
             {
-                <div class="calendar-cell @day  next-month-cell">
+                <div class="calendar-cell @day next-month-cell" id="@cellid">
                     <div class="day-header">@(dayNum - Model.DaysInMonth)</div>
                     <div class="day-body"></div>
                 </div>
