@@ -5,9 +5,9 @@
 <link rel="stylesheet" href="~/css/calendar.css" />
 <div>
     <div class="calendar-toolbar bg-info clearfix">
-        <a asp-controller="Calendar" asp-route-month="@Model.LastMonth.Month" asp-route-year="@Model.LastMonth.Year" class="month-button btn btn-primary float-left"><<</a>
+        <a asp-controller="Calendar" asp-action="Month" asp-route-datetime="@Model.LastMonth" class="month-button btn btn-primary float-left"><<</a>
         <span>@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) @Model.Year</span>
-        <a asp-controller="Calendar" asp-route-month="@Model.NextMonth.Month" asp-route-year="@Model.NextMonth.Year" class="month-button btn btn-primary float-right">>></a>
+        <a asp-controller="Calendar" asp-action="Month" asp-route-datetime="@Model.NextMonth" class="month-button btn btn-primary float-right">>></a>
     </div>
     <div class="calendar-frame">
         @for (int i = -(int)Model.StartDay; i < 42 - (int)Model.StartDay; i++)

@@ -55,4 +55,18 @@
     padding-left:100px;
 }
 
+.week-day-header {
+    height: 40px;
+    font-size: 10px;
+    color: white;
+    background-color: blue;
+    padding-left: 3px;
+}
+
+.week-frame {
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px 200px 200px 200px;
+    background-color: #2196F3;
+}
+
 

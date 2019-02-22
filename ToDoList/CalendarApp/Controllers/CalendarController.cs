@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CalendarApp.ExtensionMethods;
 using CalendarApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,29 +11,48 @@ namespace CalendarApp.Controllers
     public class CalendarController : Controller
     {
         [HttpGet]
-        public IActionResult Index(int month, int year)
+        public IActionResult Month(DateTime? datetime)
         {
-            DateTime datetime;
-
-            if (month <= 0 && year <= 0)
-                datetime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime dt;
+            if (!datetime.HasValue)
+                dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             else
-                datetime = new DateTime(year, month, 1);
+                dt = new DateTime(datetime.Value.Year, datetime.Value.Month, 1);
+
+            var daysinmonth = DateTime.DaysInMonth(dt.Year, dt.Month);
 
             var monthDto = new MonthDto()
             {
-                Month = datetime.Month,
-                Year = datetime.Year,
-                StartDay = datetime.DayOfWeek,
-                DaysInMonth = DateTime.DaysInMonth(datetime.Year, datetime.Month),
-                LastMonthDaysInMonth = DateTime.DaysInMonth(datetime.Year, datetime.Month - 1 == 0 ? 12 : datetime.Month - 1),
-                NextMonthDaysInMonth = DateTime.DaysInMonth(datetime.Year, datetime.Month + 1 == 13 ? 1 : datetime.Month + 1),
-
-                LastMonth = new DateTime(datetime.Month - 1 == 0 ? datetime.Year - 1 : datetime.Year, datetime.Month - 1 == 0 ? 12 : datetime.Month - 1, 1),
-                NextMonth = new DateTime(datetime.Month + 1 == 13 ? datetime.Year + 1 : datetime.Year, datetime.Month + 1 == 13 ? 1 : datetime.Month + 1, 1)
+                Month = dt.Month,
+                Year = dt.Year,
+                StartDay = dt.DayOfWeek,
+                DaysInMonth = daysinmonth,
+                LastMonthDaysInMonth = DateTime.DaysInMonth(dt.Year, dt.Subtract(new TimeSpan(1, 0, 0, 0)).Month),
+                LastMonth = dt.Subtract(new TimeSpan(1, 0, 0, 0)),
+                NextMonth = dt.Add(new TimeSpan(daysinmonth, 0, 0, 0))
             };
 
             return View(monthDto);
+        }
+
+        [HttpGet]
+        public IActionResult Week(DateTime? dateTime)
+        {
+            if (!dateTime.HasValue)
+                dateTime = DateTime.Now;
+
+            var startofweek = dateTime.Value.FirstDayOfWeek();
+            var endofweek = dateTime.Value.LastDayOfWeek();
+
+            var weekDto = new WeekDto()
+            {
+                StartDate = startofweek,
+                EndDate = endofweek,
+                LastWeek = startofweek.Subtract(new TimeSpan(7,0,0,0)),
+                NextWeek = endofweek.Add(new TimeSpan(7,0,0,0))
+            };          
+
+            return View(weekDto);
         }
     }
 }

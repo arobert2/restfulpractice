@@ -1,0 +1,32 @@
+﻿@model CalendarApp.Models.WeekDto
+
+@{
+    ViewData["Title"] = "Week";
+}
+<link rel="stylesheet" href="~/css/calendar.css" />
+<div class="week-frame">
+    <div class="calendar-toolbar bg-info clearfix">
+        <a asp-controller="Calendar" asp-action="Week" asp-route-datetime="@Model.LastWeek" class="month-button btn btn-primary float-left"><<</a>
+        <span>Week of @Model.StartDate.Date</span>
+        <a asp-controller="Calendar" asp-action="Week" asp-route-datetime="@Model.NextWeek" class="month-button btn btn-primary float-right">>></a>
+    </div>
+    @for (int i = 0; i < 7; i++)
+    {
+        var dt = Model.StartDate.Add(new TimeSpan(i, 0, 0, 0)).Date;
+        var cellid = dt.DayOfWeek;
+        if (DateTime.Now.Date == dt)
+        {
+            <div class="week-cell current-day" id="@cellid">
+                <div class="week-day-header"><span class="day-name">@dt.DayOfWeek</span><br /><span class="day-number">@dt.Day</span></div>
+                <div class="week-day-body"></div>
+            </div>
+        }
+        else
+        {
+            <div class="week-cell" id="@cellid">
+                <div class="week-day-header"><span class="day-name">@dt.DayOfWeek</span><br /><span class="day-number">@dt.Day</span></div>
+                <div class="week-day-body"></div>
+            </div>
+        }
+    }
+</div>
