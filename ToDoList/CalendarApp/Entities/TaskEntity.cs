@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ToDoList.Entities
+namespace CalendarApp.Entities
 {
     public class TaskEntity
     {
@@ -19,8 +19,7 @@ namespace ToDoList.Entities
         [Required]
         public TimeSpan TimeRequired { get; set; }
         [Required]
-        [ForeignKey("DayEntityId")]
-        public Guid DayId { get; set; }
+        public DateTime Date { get; set; }
         public bool Completed { get; set; } = false;
     }
 }

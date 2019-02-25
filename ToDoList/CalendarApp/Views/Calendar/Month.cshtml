@@ -6,7 +6,8 @@
 <div>
     <div class="calendar-toolbar bg-info clearfix">
         <a asp-controller="Calendar" asp-action="Month" asp-route-datetime="@Model.LastMonth" class="month-button btn btn-primary float-left"><<</a>
-        <span>@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) @Model.Year</span>
+        <a asp-controller="Calendar" asp-action="Week" class="month-button btn btn-primary float-left">Week</a>
+        <span class="calendar-toolbar-title">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) @Model.Year</span>
         <a asp-controller="Calendar" asp-action="Month" asp-route-datetime="@Model.NextMonth" class="month-button btn btn-primary float-right">>></a>
     </div>
     <div class="calendar-frame">

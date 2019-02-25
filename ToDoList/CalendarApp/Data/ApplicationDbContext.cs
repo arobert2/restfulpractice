@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ToDoList.Entities;
+using CalendarApp.Entities;
 
 namespace ToDoList.Data
 {
@@ -12,7 +12,6 @@ namespace ToDoList.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
 
-        public DbSet<DayEntity> DayTasks { get; set; }
         public DbSet<TaskEntity> TasksToDo { get; set; }
     }
 }

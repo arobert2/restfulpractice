@@ -12,7 +12,8 @@
 <div>
     <div class="calendar-toolbar bg-info clearfix">
         <a asp-controller="Calendar" asp-action="Week" asp-route-datetime="@Model.LastWeek" class="month-button btn btn-primary float-left"><<</a>
-        <span>Week of @date</span>
+        <a asp-controller="Calendar" asp-action="Month" class="month-button btn btn-primary float-left">Month</a>
+        <span class="calendar-toolbar-title">Week of @date</span>
         <a asp-controller="Calendar" asp-action="Week" asp-route-datetime="@Model.NextWeek" class="month-button btn btn-primary float-right">>></a>
     </div>
     <div class="week-frame">

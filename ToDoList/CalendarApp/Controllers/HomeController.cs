@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CalendarApp.Services;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ToDoList.Services;
 
 namespace ToDoList.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IToDoRepository _toDoRepository;
+        private readonly ICalendarEventRepository _toDoRepository;
 
-        public HomeController(IToDoRepository toDoRepository)
+        public HomeController(ICalendarEventRepository toDoRepository)
         {
             _toDoRepository = toDoRepository;
         }

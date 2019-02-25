@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CalendarApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ToDoList.Data;
 
 namespace CalendarApp
 {
@@ -31,6 +34,9 @@ namespace CalendarApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            var connectionString = Configuration["connectionStrings:CalendarDBConnectionString"];
+            services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(connectionString));
+            services.AddScoped<ICalendarEventRepository, CalendarEventRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -52,6 +58,11 @@ namespace CalendarApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Models.ErrorViewModel, Entities.TaskEntity>();
+            });
 
             app.UseMvc(routes =>
             {
