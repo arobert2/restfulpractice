@@ -44,7 +44,7 @@ namespace CalendarApp.Controllers
             var startofweek = dateTime.Value.FirstDayOfWeek();
             var endofweek = dateTime.Value.LastDayOfWeek();
 
-            var weekDto = new WeekDto()
+            var weekDto = new WeekViewModel()
             {
                 StartDate = startofweek,
                 EndDate = endofweek,

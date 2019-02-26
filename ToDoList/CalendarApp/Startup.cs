@@ -61,7 +61,9 @@ namespace CalendarApp
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Models.ErrorViewModel, Entities.TaskEntity>();
+                cfg.CreateMap<Models.ScheduleEventDto, Entities.TaskEntity>();
+
+                cfg.CreateMap<Entities.TaskEntity, Models.EventDto>();
             });
 
             app.UseMvc(routes =>

@@ -1,15 +1,20 @@
-﻿using System;
+﻿using CalendarApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CalendarApp.Models
 {
+    
     public class EventDto
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public TimeSpan TimeRequired { get; set; }
-        public DateTime Date { get; set; }
+        public string Location { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public UserStatus UserStatus { get; set; }
+        public bool Cancelled { get; set; }
     }
 }

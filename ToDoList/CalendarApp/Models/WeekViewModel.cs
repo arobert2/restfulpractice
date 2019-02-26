@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CalendarApp.Models
 {
-    public class WeekDto
+    public class WeekViewModel
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

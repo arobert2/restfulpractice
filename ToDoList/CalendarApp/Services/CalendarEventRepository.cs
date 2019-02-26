@@ -31,9 +31,14 @@ namespace CalendarApp.Services
             return _dbContext.TasksToDo.FirstOrDefault(t => t.Id == id);
         }
 
+        public TaskEntity GetEvent(DateTime dateTime)
+        {
+            return _dbContext.TasksToDo.FirstOrDefault(te => te.Start == dateTime);
+        }
+
         public IEnumerable<TaskEntity> GetEvents(DateTime start, DateTime end)
         {
-            return _dbContext.TasksToDo.Where(te => te.Date >= start && te.Date <= end);
+            return _dbContext.TasksToDo.Where(te => te.Start >= start && te.Start <= end);
         }
 
         public bool Save()

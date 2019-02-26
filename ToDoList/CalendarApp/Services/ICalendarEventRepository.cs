@@ -10,6 +10,7 @@ namespace CalendarApp.Services
     {
         void AddEvent(TaskEntity taskEntity);
         TaskEntity GetEvent(Guid id);
+        TaskEntity GetEvent(DateTime dateTime);
         IEnumerable<TaskEntity> GetEvents(DateTime start, DateTime end);
         void DeleteEvent(TaskEntity taskEntity);
         void UpdateEvent(TaskEntity taskEntity);

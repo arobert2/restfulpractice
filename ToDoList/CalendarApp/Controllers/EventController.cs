@@ -6,6 +6,7 @@ using CalendarApp.Models;
 using CalendarApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using CalendarApp.Entities;
+using AutoMapper;
 
 namespace CalendarApp.Controllers
 {
@@ -18,15 +19,26 @@ namespace CalendarApp.Controllers
         {
             _calendarRepository = calendarRepository;
         }
+        [HttpGet("{id}", Name="GetEvent")]
+        public IActionResult GetEvent(Guid id)
+        {
+            var eventFromRepo = _calendarRepository.GetEvent(id);
+            if (eventFromRepo == null)
+                return NotFound();
+            var eventFromMap = Mapper.Map<EventDto>(eventFromRepo);
+            return Ok(eventFromRepo);
+        }
 
-        [HttpGet("{datetime}")]
+        [HttpGet("/day/{datetime}")]
         public IActionResult GetDayEvents(DateTime datetime)
         {
             var eventsFromRepository = _calendarRepository.GetEvents(datetime, datetime.Add(new TimeSpan(23, 59, 59)));
             if (eventsFromRepository.Count() == 0)
                 return NotFound();
 
-            return Ok(eventsFromRepository);
+            var eventsdtomap = Mapper.Map <IEnumerable<EventDto>>(eventsFromRepository);
+
+            return Ok(eventsdtomap);
         }
 
         [HttpGet("{start}/{end}")]
@@ -36,7 +48,9 @@ namespace CalendarApp.Controllers
             if (eventsFromRepository.Count() == 0)
                 return NotFound();
 
-            return Ok(eventsFromRepository);
+            var eventsdtomap = Mapper.Map<IEnumerable<EventDto>>(eventsFromRepository);
+
+            return Ok(eventsdtomap);
         }
 
         [HttpDelete("{id}")]
@@ -53,9 +67,16 @@ namespace CalendarApp.Controllers
             return NoContent();
         }
         [HttpPost]
-        public IActionResult ScheduleEvent([FromBody] EventDto eventDto)
+        public IActionResult ScheduleEvent([FromBody] ScheduleEventDto scheduleEventDto)
         {
-            return Ok();
+            if (scheduleEventDto == null)
+                return BadRequest();
+
+            var eventEntityMap = Mapper.Map<TaskEntity>(scheduleEventDto);
+            _calendarRepository.AddEvent(eventEntityMap);
+            if (!_calendarRepository.Save())
+                throw new Exception("Failed to create event on save.");
+            return CreatedAtRoute("GeEvent", new { id = eventEntityMap.Id }, eventEntityMap);
         }
     }
 }

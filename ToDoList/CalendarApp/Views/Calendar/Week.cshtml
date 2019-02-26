@@ -1,4 +1,4 @@
-﻿@model CalendarApp.Models.WeekDto
+﻿@model CalendarApp.Models.WeekViewModel
 
 @{
     ViewData["Title"] = "Week";
@@ -38,3 +38,4 @@
     }
     </div>
 </div>
+<partial class="new-event-schedule-form" name="ScheduleNewEvent" model="new ScheduleEventDto()"/>

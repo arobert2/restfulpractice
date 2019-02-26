@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CalendarApp.Entities
 {
+    public enum UserStatus { Busy, Free, OutOfOffice, InMeeting }
     public class TaskEntity
     {
         [Key]
@@ -16,10 +17,14 @@ namespace CalendarApp.Entities
         public string Title { get; set; }
         [MaxLength(100)]
         public string Description { get; set; }
+        [MaxLength(50)]
+        public string Location { get; set; }
         [Required]
-        public TimeSpan TimeRequired { get; set; }
+        public DateTime Start { get; set; }
         [Required]
-        public DateTime Date { get; set; }
-        public bool Completed { get; set; } = false;
+        public DateTime End { get; set; }
+        [Required]
+        public UserStatus UserStatus { get; set; }
+        public bool Cancelled { get; set; } = false;
     }
 }
