@@ -16,29 +16,29 @@ namespace CalendarApp.Services
             _dbContext = dbContext;
         }
 
-        public void AddEvent(TaskEntity taskEntity)
+        public void AddEvent(CalendarEvent taskEntity)
         {
-            _dbContext.TasksToDo.Add(taskEntity);
+            _dbContext.CalendarEvents.Add(taskEntity);
         }
 
-        public void DeleteEvent(TaskEntity taskEntity)
+        public void DeleteEvent(CalendarEvent taskEntity)
         {
             _dbContext.Remove(taskEntity);
         }
 
-        public TaskEntity GetEvent(Guid id)
+        public CalendarEvent GetEvent(Guid id)
         {
-            return _dbContext.TasksToDo.FirstOrDefault(t => t.Id == id);
+            return _dbContext.CalendarEvents.FirstOrDefault(t => t.Id == id);
         }
 
-        public TaskEntity GetEvent(DateTime dateTime)
+        public CalendarEvent GetEvent(DateTime dateTime)
         {
-            return _dbContext.TasksToDo.FirstOrDefault(te => te.Start == dateTime);
+            return _dbContext.CalendarEvents.FirstOrDefault(te => te.Start == dateTime);
         }
 
-        public IEnumerable<TaskEntity> GetEvents(DateTime start, DateTime end)
+        public IEnumerable<CalendarEvent> GetEvents(DateTime start, DateTime end)
         {
-            return _dbContext.TasksToDo.Where(te => te.Start >= start && te.Start <= end);
+            return _dbContext.CalendarEvents.Where(te => te.Start >= start && te.Start <= end);
         }
 
         public bool Save()
@@ -46,7 +46,7 @@ namespace CalendarApp.Services
             return (_dbContext.SaveChanges() >= 0);
         }
 
-        public void UpdateEvent(TaskEntity taskEntity)
+        public void UpdateEvent(CalendarEvent taskEntity)
         {
             //uneeded for EF
         }

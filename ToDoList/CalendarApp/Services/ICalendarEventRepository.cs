@@ -8,12 +8,12 @@ namespace CalendarApp.Services
 {
     public interface ICalendarEventRepository
     {
-        void AddEvent(TaskEntity taskEntity);
-        TaskEntity GetEvent(Guid id);
-        TaskEntity GetEvent(DateTime dateTime);
-        IEnumerable<TaskEntity> GetEvents(DateTime start, DateTime end);
-        void DeleteEvent(TaskEntity taskEntity);
-        void UpdateEvent(TaskEntity taskEntity);
+        void AddEvent(CalendarEvent taskEntity);
+        CalendarEvent GetEvent(Guid id);
+        CalendarEvent GetEvent(DateTime dateTime);
+        IEnumerable<CalendarEvent> GetEvents(DateTime start, DateTime end);
+        void DeleteEvent(CalendarEvent taskEntity);
+        void UpdateEvent(CalendarEvent taskEntity);
         bool Save();
     }
 }

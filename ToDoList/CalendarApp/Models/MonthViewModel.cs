@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CalendarApp.Models
 {
-    public class MonthDto
+    public class MonthViewModel
     {
         public int Month { get; set; }
         public int Year { get; set; }

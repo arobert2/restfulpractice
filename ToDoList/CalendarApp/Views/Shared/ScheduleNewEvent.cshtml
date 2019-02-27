@@ -1,24 +1,29 @@
-﻿@model CalendarApp.Models.ScheduleEventDto
+﻿@model CalendarApp.Models.ScheduleCalendarEventDto
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
 @{ 
+    var formpath = Url.RouteUrl("/api/events/");
     var datetimestr = DateTime.Now.ToString();
     var date = datetimestr.Remove(datetimestr.LastIndexOf(':') - 5, 11);
 
     var time = datetimestr.Substring(datetimestr.LastIndexOf(':') - 5);
+
 }
 
 <div>
-    <form asp-route="events" method="post">
+    <form>
         <div class="schedule-info-frame">
             <label asp-for="Title"></label><br />
             <input asp-for="Title" type="text" /><br />
 
             <label asp-for="Location"></label><br />
             <input asp-for="Location" type="text" /><br />
-
+        </div>
+        <div class="schedule-info-frame">
+            <label asp-for="UserStatus"></label>
+            <input asp-for="UserStatus" type="text" /><br />
             <label asp-for="Description"></label><br />
             <input asp-for="Description" type="text" /><br />
         </div>
@@ -33,10 +38,8 @@
             <input asp-for="EndTime" type="time" value="@time" />
         </div>
 
-        <label asp-for="UserStatus"></label>
-        <input asp-for="UserStatus" type="text" />
 
-        <button type="submit">Submit</button>
+        <button type="submit" formaction="@Url.RouteUrl("/api/events/")" formmethod="post">Submit</button>
         <button type="button">Cancel</button>
     </form>
 </div>

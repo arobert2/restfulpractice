@@ -61,9 +61,9 @@ namespace CalendarApp
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Models.ScheduleEventDto, Entities.TaskEntity>();
+                cfg.CreateMap<Models.ScheduleCalendarEventDto, Entities.CalendarEvent>();
 
-                cfg.CreateMap<Entities.TaskEntity, Models.EventDto>();
+                cfg.CreateMap<Entities.CalendarEvent, Models.CalendarEventDto>();
             });
 
             app.UseMvc(routes =>
@@ -71,6 +71,12 @@ namespace CalendarApp
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+
+                    name: "eventApi",
+                    template: "api/events/{action}/{id?}",
+                    defaults: new { Controller = "Event"});
             });
         }
     }

@@ -12,6 +12,6 @@ namespace ToDoList.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
 
-        public DbSet<TaskEntity> TasksToDo { get; set; }
+        public DbSet<CalendarEvent> CalendarEvents { get; set; }
     }
 }

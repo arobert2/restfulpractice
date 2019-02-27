@@ -21,7 +21,7 @@ namespace CalendarApp.Controllers
 
             var daysinmonth = DateTime.DaysInMonth(dt.Year, dt.Month);
 
-            var monthDto = new MonthDto()
+            var monthDto = new MonthViewModel()
             {
                 Month = dt.Month,
                 Year = dt.Year,

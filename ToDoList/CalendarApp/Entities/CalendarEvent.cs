@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CalendarApp.Entities
 {
     public enum UserStatus { Busy, Free, OutOfOffice, InMeeting }
-    public class TaskEntity
+    public class CalendarEvent
     {
         [Key]
         public Guid Id { get; set; }
