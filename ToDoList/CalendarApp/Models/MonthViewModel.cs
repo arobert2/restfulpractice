@@ -11,10 +11,12 @@ namespace CalendarApp.Models
         public int Year { get; set; }
         public int DaysInMonth { get; set; }
         public int LastMonthDaysInMonth { get; set; }
-        public int NextMonthDaysInMonth { get; set; }
         public DayOfWeek StartDay { get; set; }
-
         public DateTime LastMonth { get; set; }
         public DateTime NextMonth { get; set; }
+
+        public string HeaderText => System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Month) + " " + Year;
+
+        public List<CalendarEventDto> ScheduledEvents { get; set; } = new List<CalendarEventDto>();
     }
 }
