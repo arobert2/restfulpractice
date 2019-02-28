@@ -10,17 +10,16 @@ using AutoMapper;
 
 namespace CalendarApp.Controllers
 {
-
+    [Route("api/event")]
+    [ApiController]
     public class EventController : Controller
     {
         private readonly ICalendarEventRepository _calendarRepository;
-
-
         public EventController(ICalendarEventRepository calendarRepository)
         {
             _calendarRepository = calendarRepository;
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetEvent")]
         public IActionResult GetEvent(Guid id)
         {
             var eventFromRepo = _calendarRepository.GetEvent(id);
@@ -28,29 +27,7 @@ namespace CalendarApp.Controllers
                 return NotFound();
             var eventFromMap = Mapper.Map<CalendarEventDto>(eventFromRepo);
             return Ok(eventFromRepo);
-        }
-        [HttpGet("{datetime}")]
-        public IActionResult GetEvents(DateTime datetime)
-        {
-            var eventsFromRepository = _calendarRepository.GetEvents(datetime, datetime.Add(new TimeSpan(23, 59, 59)));
-            if (eventsFromRepository.Count() == 0)
-                return NotFound();
-
-            var eventsdtomap = Mapper.Map<IEnumerable<CalendarEventDto>>(eventsFromRepository);
-
-            return Ok(eventsdtomap);
-        }
-        [HttpGet("{start}/{end}")]
-        public IActionResult GetEvents(DateTime start, DateTime end)
-        {
-            var eventsFromRepository = _calendarRepository.GetEvents(start, end);
-            if (eventsFromRepository.Count() == 0)
-                return NotFound();
-
-            var eventsdtomap = Mapper.Map<IEnumerable<CalendarEventDto>>(eventsFromRepository);
-
-            return Ok(eventsdtomap);
-        }
+        }        
         [HttpDelete("{id}")]
         public IActionResult DeleteEvent(Guid id)
         {
@@ -65,7 +42,7 @@ namespace CalendarApp.Controllers
             return NoContent();
         }
         [HttpPost]
-        public IActionResult ScheduleEvent([FromBody] ScheduleCalendarEventDto scheduleCalendarEventDto)
+        public IActionResult ScheduleEvent([FromForm]ScheduleCalendarEventDto scheduleCalendarEventDto)
         {
             if (scheduleCalendarEventDto == null)
                 return BadRequest();
@@ -76,7 +53,7 @@ namespace CalendarApp.Controllers
                 throw new Exception("Failed to create event on save.");
             return CreatedAtRoute("GeEvent", new { id = eventEntityMap.Id }, eventEntityMap);
         }
-        [HttpPatch]
+        [HttpPatch("{id}")]
         public IActionResult UpdateEvent(Guid id, [FromBody] UpdateCalendarEventDto updateCalendarEventDto)
         {
             return Ok();

@@ -4,7 +4,8 @@
 *@
 
 @{ 
-    var formpath = Url.RouteUrl("/api/events/");
+    var formpath = "/api/event/";
+
     var datetimestr = DateTime.Now.ToString();
     var date = datetimestr.Remove(datetimestr.LastIndexOf(':') - 5, 11);
 
@@ -13,7 +14,7 @@
 }
 
 <div>
-    <form>
+    <form action="@formpath" method="post" enctype="application/x-www-form-urlencoded">
         <div class="schedule-info-frame">
             <label asp-for="Title"></label><br />
             <input asp-for="Title" type="text" /><br />
@@ -23,7 +24,12 @@
         </div>
         <div class="schedule-info-frame">
             <label asp-for="UserStatus"></label>
-            <input asp-for="UserStatus" type="text" /><br />
+            <select asp-for="UserStatus">
+                <option value="0">Busy</option>
+                <option value="1">Free</option>
+                <option value="2">Out Of Office</option>
+                <option value="3">In Meeting</option>
+            </select><br />
             <label asp-for="Description"></label><br />
             <input asp-for="Description" type="text" /><br />
         </div>
@@ -39,7 +45,7 @@
         </div>
 
 
-        <button type="submit" formaction="@Url.RouteUrl("/api/events/")" formmethod="post">Submit</button>
+        <button type="submit" formaction="@formpath" formmethod="post">Submit</button>
         <button type="button">Cancel</button>
     </form>
 </div>
