@@ -12,11 +12,11 @@ namespace CalendarApp.Controllers
 {
     [Route("api/events")]
     [ApiController]
-    public class EventCollectionsController : Controller
+    public class EventCollectionsApiController : Controller
     {
         private readonly ICalendarEventRepository _calendarRepository;
 
-        public EventCollectionsController(ICalendarEventRepository calendarEventRepository)
+        public EventCollectionsApiController(ICalendarEventRepository calendarEventRepository)
         {
             _calendarRepository = calendarEventRepository;
         }
