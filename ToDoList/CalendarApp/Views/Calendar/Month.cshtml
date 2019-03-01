@@ -1,15 +1,19 @@
-﻿@model CalendarApp.Models.MonthViewModel
+﻿@model CalendarApp.Models.ViewModels.MonthViewModel
+@using CalendarApp.Models.ViewModels;
 @{
     ViewData["Title"] = "Calendar";
+
+    var toolBarModel = new CalendarToolBarViewModel() {
+        CurrentDate = DateTime.Now, 
+        LastDate = Model.LastMonth, 
+        NextDate = Model.NextMonth, 
+        ToolbarText = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month).ToString() + " " + Model.Year, 
+        ViewActionName = "Week"
+    };
 }
 <link rel="stylesheet" href="~/css/calendar.css" />
 <div>
-    <div class="calendar-toolbar bg-info clearfix">
-        <a asp-controller="Calendar" asp-action="Month" asp-route-datetime="@Model.LastMonth" class="month-button btn btn-primary float-left"><<</a>
-        <a asp-controller="Calendar" asp-action="Week" class="month-button btn btn-primary float-left">Week</a>
-        <span class="calendar-toolbar-title">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) @Model.Year</span>
-        <a asp-controller="Calendar" asp-action="Month" asp-route-datetime="@Model.NextMonth" class="month-button btn btn-primary float-right">>></a>
-    </div>
+    <partial name="CalendarToolBar" model="toolBarModel" />
     <div class="calendar-frame">
         @for (int i = -(int)Model.StartDay; i < 42 - (int)Model.StartDay; i++)
         {
@@ -53,5 +57,3 @@
         }
     </div>
 </div>
-<partial class="new-event-schedule-form" name="ScheduleNewEvent" />
-

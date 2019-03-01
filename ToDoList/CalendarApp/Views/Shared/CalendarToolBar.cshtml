@@ -1,0 +1,13 @@
+﻿@model CalendarApp.Models.ViewModels.CalendarToolBarViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div class="calendar-toolbar bg-info clearfix">
+    <a asp-route-datetime="@Model.LastDate" class="month-button btn btn-primary float-left"><<</a>
+    <a asp-controller="Calendar" asp-action="@Model.ViewActionName" class="month-button btn btn-primary float-left">@Model.ViewActionName</a>
+    <span class="calendar-toolbar-title">@Model.ToolbarText</span>
+    <a asp-route-datetime="@Model.NextDate" class="month-button btn btn-primary float-right">>></a>
+    <a asp-controller="Event" asp-action="ScheduleNewEvent" class="month-button btn btn-primary float-right">New Event</a>
+</div>

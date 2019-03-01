@@ -69,7 +69,11 @@ namespace CalendarApp
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Models.ScheduleCalendarEventDto, Entities.CalendarEvent>();
+                cfg.CreateMap<Models.ScheduleCalendarEventDto, Entities.CalendarEvent>()
+                .ForMember(dest => dest.Start, opt => opt.MapFrom(src =>
+                $"{src.StartDate} {src.StartTime}"))
+                .ForMember(dest => dest.End, opt => opt.MapFrom(src =>
+                $"{src.EndDate} {src.EndTime}"));
 
                 cfg.CreateMap<Entities.CalendarEvent, Models.CalendarEventDto>();
             });

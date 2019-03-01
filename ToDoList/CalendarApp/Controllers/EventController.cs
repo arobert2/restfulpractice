@@ -7,6 +7,7 @@ using CalendarApp.Models;
 using CalendarApp.Services;
 using AutoMapper;
 using CalendarApp.Entities;
+using CalendarApp.ExtensionMethods;
 
 namespace CalendarApp.Controllers
 {
@@ -34,7 +35,7 @@ namespace CalendarApp.Controllers
             var mappedCalendarEvent = Mapper.Map<CalendarEvent>(scheduleCalendarEventDto);
             _calendarEventRepository.AddEvent(mappedCalendarEvent);
 
-            if (_calendarEventRepository.Save())
+            if (!_calendarEventRepository.Save())
                 return View(scheduleCalendarEventDto);
 
             return RedirectToAction("Week", "Calendar");

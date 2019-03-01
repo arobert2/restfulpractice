@@ -1,21 +1,23 @@
-﻿@model CalendarApp.Models.WeekViewModel
-
+﻿@model CalendarApp.Models.ViewModels.WeekViewModel
+@using CalendarApp.Models.ViewModels;
 @{
     ViewData["Title"] = "Week";
 
     var date = Model.StartDate.Date.ToString();
     date = date.Remove(date.LastIndexOf(':') - 5, 11);
+    var toolBarModel = new CalendarToolBarViewModel()
+    {
+        CurrentDate = DateTime.Now,
+        LastDate = Model.LastWeek,
+        NextDate = Model.NextWeek,
+        ToolbarText = "Week of " + date,
+        ViewActionName = "Month"
+    };
 }
-
 
 <link rel="stylesheet" href="~/css/calendar.css" />
 <div>
-    <div class="calendar-toolbar bg-info clearfix">
-        <a asp-controller="Calendar" asp-action="Week" asp-route-datetime="@Model.LastWeek" class="month-button btn btn-primary float-left"><<</a>
-        <a asp-controller="Calendar" asp-action="Month" class="month-button btn btn-primary float-left">Month</a>
-        <span class="calendar-toolbar-title">Week of @date</span>
-        <a asp-controller="Calendar" asp-action="Week" asp-route-datetime="@Model.NextWeek" class="month-button btn btn-primary float-right">>></a>
-    </div>
+    <partial name="CalendarToolBar" model="toolBarModel" />
     <div class="week-frame">
     @for (int i = 0; i < 7; i++)
     {
@@ -38,4 +40,3 @@
     }
     </div>
 </div>
-<partial class="new-event-schedule-form" name="ScheduleNewEvent" model="new ScheduleCalendarEventDto()"/>

@@ -4,12 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using CalendarApp.ExtensionMethods;
 using CalendarApp.Models;
+using CalendarApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalendarApp.Controllers
 {
     public class CalendarController : Controller
     {
+        /// <summary>
+        /// Returns a view that renders a monthly calendar
+        /// </summary>
+        /// <param name="datetime"></param>
+        /// <returns>View</returns>
         [HttpGet]
         public IActionResult Month(DateTime? datetime)
         {
@@ -34,7 +40,11 @@ namespace CalendarApp.Controllers
 
             return View(monthDto);
         }
-
+        /// <summary>
+        /// Returns a view that renders a weekly planner
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Week(DateTime? dateTime)
         {
@@ -53,6 +63,18 @@ namespace CalendarApp.Controllers
             };          
 
             return View(weekDto);
+        }
+
+        [HttpGet]
+        public IActionResult Day(DateTime? datetime)
+        {
+            DateTime dateTimeFromInput;
+            if (datetime == null)
+                dateTimeFromInput = DateTime.Now;
+            else
+                dateTimeFromInput = datetime.Value;
+
+            return View(dateTimeFromInput);
         }
     }
 }
