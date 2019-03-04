@@ -5,9 +5,10 @@
 *@
 
 <div class="calendar-toolbar bg-info clearfix">
-    <a asp-route-datetime="@Model.LastDate" class="month-button btn btn-primary float-left"><<</a>
-    <a asp-controller="Calendar" asp-action="@Model.ViewActionName" class="month-button btn btn-primary float-left">@Model.ViewActionName</a>
+    <a asp-route-datetime="@Model.LastDate" class="btn btn-primary float-left"><<</a>
+    <a asp-controller="Calendar" asp-action="@Model.ViewActionName" class="btn btn-primary float-left">@Model.ViewActionName</a>
     <span class="calendar-toolbar-title">@Model.ToolbarText</span>
-    <a asp-route-datetime="@Model.NextDate" class="month-button btn btn-primary float-right">>></a>
-    <a asp-controller="Event" asp-action="ScheduleNewEvent" class="month-button btn btn-primary float-right">New Event</a>
+    <a asp-route-datetime="@Model.NextDate" class="btn btn-primary float-right">>></a>
+    <button asp-controller="Event" asp-action="ScheduleNewEvent" class="new-event-button btn btn-primary float-right">New Event</button>
 </div>
+<script src="~/js/calendar.js" type="text/javascript"></script>
