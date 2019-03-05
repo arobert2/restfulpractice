@@ -64,7 +64,11 @@ namespace CalendarApp.Controllers
 
             return View(weekDto);
         }
-
+        /// <summary>
+        /// Returns a Day view
+        /// </summary>
+        /// <param name="datetime">datetime object of day.</param>
+        /// <returns>View of the day</returns>
         [HttpGet]
         public IActionResult Day(DateTime? datetime)
         {

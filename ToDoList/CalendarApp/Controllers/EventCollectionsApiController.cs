@@ -20,8 +20,11 @@ namespace CalendarApp.Controllers
         {
             _calendarRepository = calendarEventRepository;
         }
-
-
+        /// <summary>
+        /// Get events for that particular day
+        /// </summary>
+        /// <param name="datetime">DateTime object of day</param>
+        /// <returns>Event data</returns>
         [HttpGet("/day/{datetime}")]
         public IActionResult GetDayEvents(DateTime datetime)
         {

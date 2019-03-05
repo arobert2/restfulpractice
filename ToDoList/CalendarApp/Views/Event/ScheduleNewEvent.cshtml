@@ -5,44 +5,45 @@
 *@
 
 @{
+    Layout = "";
     var datetime = DateTime.Now.RoundToQuarter();
     var date = datetime.ApproxDate();
     var time = datetime.Time24();
 }
 
 <div>
-    <form asp-action="ScheduleNewEvent" asp-controller="Event" method="post" enctype="application/x-www-form-urlencoded">
+    <form asp-action="ScheduleNewEvent" asp-controller="Event" method="post" enctype="application/x-www-form-urlencoded" id="schedule-form">
         <div class="schedule-info-frame">
             <label asp-for="Title"></label><br />
-            <input asp-for="Title" type="text" /><br />
+            <input asp-for="Title" type="text" class="form-data" /><br />
 
             <label asp-for="Location"></label><br />
-            <input asp-for="Location" type="text" /><br />
+            <input asp-for="Location" type="text" class="form-data"/><br />
         </div>
         <div class="schedule-info-frame">
             <label asp-for="UserStatus"></label>
-            <select asp-for="UserStatus">
+            <select asp-for="UserStatus" class="form-data">
                 <option value="0">Busy</option>
                 <option value="1">Free</option>
                 <option value="2">Out Of Office</option>
                 <option value="3">In Meeting</option>
             </select><br />
             <label asp-for="Description"></label><br />
-            <input asp-for="Description" type="text" /><br />
+            <input asp-for="Description" type="text" class="form-data" /><br />
         </div>
         <div class="date-time-frame">
             <label asp-for="StartDate"></label><br />
-            <input asp-for="StartDate" type="date" value="@date" /><br />
-            <input asp-for="StartTime" type="time" value="@time" />
+            <input asp-for="StartDate" type="date" value="@date" class="form-data"/><br />
+            <input asp-for="StartTime" type="time" value="@time" class="form-data"/>
         </div>
         <div class="date-time-frame">
             <label asp-for="EndDate"></label><br />
-            <input asp-for="EndDate" type="date" value="@date" /><br />
-            <input asp-for="EndTime" type="time" value="@time" />
+            <input asp-for="EndDate" type="date" value="@date" class="form-data"/><br />
+            <input asp-for="EndTime" type="time" value="@time" class="form-data"/>
         </div>
 
 
-        <button type="submit">Submit</button>
-        <button type="button">Cancel</button>
+        <button id="schedule-event-submit-button" type="submit">Submit</button>
+        <button id="schedule-event-cancel-button" type="button">Cancel</button>
     </form>
 </div>
