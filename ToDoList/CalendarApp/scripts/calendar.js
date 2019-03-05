@@ -6,8 +6,14 @@ $('.new-event-button').click(function () {
     });
 });
 $('#schedule-event-submit-button').submit(function (e) {
-    let formdata = document.getElementsByClassName('form-data');
-    let formobj = {};
+    let formhtmldata = document.querySelector('form');
+    let formData = new FormData(formhtmldata);
+    let strObj;
+    formData.forEach(function (value, key) {
+        strObj[key] = value;
+    });
+    let jsonFormData = JSON.stringify(strObj);
+    console.log(jsonFormData);
 });
 $('#schedule-event-cancel-button').click(function (e) {
     let eventobj = document.getElementById('schedule-event-pane');
