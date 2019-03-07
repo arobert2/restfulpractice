@@ -66,10 +66,12 @@ namespace CalendarApp.ExtensionMethods
         /// <returns>Time formatted for html time value.</returns>
         public static string Time24(this DateTime dateTime)
         {
+            var hour = dateTime.Hour < 10 ? "0" + dateTime.Hour : dateTime.Hour.ToString();
+            var minute = dateTime.Minute < 10 ? "0" + dateTime.Minute : dateTime.Minute.ToString();
             var timeAsString = new StringBuilder()
-                .Append(dateTime.Hour)
+                .Append(hour)
                 .Append(':')
-                .Append(dateTime.Minute)
+                .Append(minute)
                 .ToString();
 
             return timeAsString;

@@ -40,6 +40,7 @@
             <input asp-for="EndDate" type="date" value="@date" class="form-data"/><br />
             <input asp-for="EndTime" type="time" value="@time" class="form-data"/>
         </div>
+        <input asp-for="Cancelled"  type="hidden" value="false" />
         <button id="schedule-event-submit-button" type="button">Submit</button>
         <button id="schedule-event-cancel-button" type="reset">Cancel</button>
     </form>

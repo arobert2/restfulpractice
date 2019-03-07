@@ -8,6 +8,7 @@ $('#schedule-event-submit-button').click(function (e) {
     let entries = formDataObj.entries;
     let strObj = {};
     for (let entry of formDataObj.entries()) {
+        console.log(entry[0] + ', ' + entry[1]);
         strObj[entry[0]] = entry[1].toString();
     }
     let jsonFormData = JSON.stringify(strObj);

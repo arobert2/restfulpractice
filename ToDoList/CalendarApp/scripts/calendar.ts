@@ -10,6 +10,7 @@ $('#schedule-event-submit-button').click(function (e) {
     let entries = formDataObj.entries;
     let strObj: KeyValuePair = {};
     for (let entry of formDataObj.entries()) {
+        console.log(entry[0] + ', ' + entry[1]);
         strObj[entry[0]] = entry[1].toString();
     }
 
