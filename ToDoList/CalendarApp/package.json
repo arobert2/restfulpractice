@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {},
   "dependencies": {
-    "@types/jquery": "^3.3.29",
+    "@types/jquery": "3.3.29",
     "@types/npm": "^2.0.30",
     "del": "^4.0.0",
     "gulp": "^4.0.0"

@@ -7,6 +7,7 @@ using CalendarApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using CalendarApp.Entities;
 using AutoMapper;
+using CalendarApp.Models.Dtos;
 
 namespace CalendarApp.Controllers
 {
@@ -41,7 +42,7 @@ namespace CalendarApp.Controllers
 
             return NoContent();
         }
-        [HttpPost("form/")]
+        [HttpPost]
         public IActionResult ScheduleEvent([FromBody]ScheduleCalendarEventDto scheduleCalendarEventDto)
         {
             if (scheduleCalendarEventDto == null)

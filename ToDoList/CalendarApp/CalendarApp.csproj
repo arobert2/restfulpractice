@@ -21,6 +21,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Views\Event\" />
     <Folder Include="wwwroot\scripts\" />
   </ItemGroup>
 

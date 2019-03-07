@@ -8,6 +8,7 @@ using CalendarApp.Services;
 using AutoMapper;
 using CalendarApp.Entities;
 using CalendarApp.ExtensionMethods;
+using CalendarApp.Models.Dtos;
 
 namespace CalendarApp.Controllers
 {

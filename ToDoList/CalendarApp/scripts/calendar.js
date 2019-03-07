@@ -1,23 +1,29 @@
 $('.new-event-button').click(function () {
-    let eventPane = document.getElementById('schedule-event-pane');
+    let eventPane = document.getElementById('schedule-new-event-pane');
     eventPane.style.display = 'block';
-    $.get("../Event/ScheduleNewEvent", function (data) {
-        $('#schedule-event-pane').html(data);
-    });
 });
-$('#schedule-event-submit-button').submit(function (e) {
+$('#schedule-event-submit-button').click(function (e) {
     let formhtmldata = document.querySelector('form');
-    let formData = new FormData(formhtmldata);
-    let strObj;
-    formData.forEach(function (value, key) {
-        strObj[key] = value;
-    });
+    let formDataObj = new FormData(formhtmldata);
+    let entries = formDataObj.entries;
+    let strObj = {};
+    for (let entry of formDataObj.entries()) {
+        strObj[entry[0]] = entry[1].toString();
+    }
     let jsonFormData = JSON.stringify(strObj);
     console.log(jsonFormData);
+    $.ajax({
+        type: "POST",
+        url: '../api/event',
+        data: strObj,
+        success: function (data, textStatus, jqXHR) {
+            console.log('succeeded');
+        },
+        dataType: 'json'
+    });
 });
 $('#schedule-event-cancel-button').click(function (e) {
-    let eventobj = document.getElementById('schedule-event-pane');
-    eventobj.removeChild(eventobj.children[0]);
-    eventobj.style.display = 'none';
+    let eventPane = document.getElementById('schedule-new-event-pane');
+    eventPane.style.display = 'none';
 });
 //# sourceMappingURL=calendar.js.map
